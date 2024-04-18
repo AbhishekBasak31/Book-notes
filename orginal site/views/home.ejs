@@ -1,0 +1,62 @@
+<%-include("pertials/header.ejs")%>
+
+<div id="midcontainer">
+  <% for(items of listofitems) {%>
+    <div id="post" class="posts">
+    
+      <figure style="display: inline;">
+        
+      <a href="/books/<%=items.book_name%>"
+        ><img src="https://covers.openlibrary.org/b/isbn/<%=items.isbn%>-M.jpg" alt="bookcover" style="width:10%;  "></a>
+   
+    </figure>
+      <h2
+        style="
+          display: inline;
+          font-family: 'Lobster', sans-serif;
+          font-size: 1ew;
+          margin: 0% 5% 0% 5%;
+          
+        "
+      >
+      
+
+    
+        <a href="/books/<%=items.book_name%>"
+        style="text-decoration: underline; color: black;"
+          ><%= items.book_name %>By-<%= items.author_name %></a
+        >
+      </h2>
+     
+<pre style="display:block;">
+
+Date of upload:<%= items.date_of_upload %>. 
+
+<div class="uploaded_user">
+<p style="margin:0; padding: 2% 0 0 0;">Uploaded by:</p>
+   <% if(items.user_image==null){%>                    
+  <img src="/image/Screenshot (28).png" alt="user image"  class="uploaded_user_img">   
+  <% }else{ %>
+    <img src="<%=items.user_image%>" alt="user image" class="uploaded_user_img" >
+    <% } %>
+    <h3 style="margin:0; font-size:1.2rem; display: inline; padding: 2% 0 0 0;"><%= items.user_name%></h3>
+</div> 
+How strongly I recommend it:<strong><%=items.book_rate%></strong>/10
+</pre>
+
+      <p style="max-width: 95%; text-align:justify;">
+       <%= items.summery_of_book%>
+      </p>
+      <strong><a href="/books/<%= items.book_name %>" style="color: black ;text-decoration: none;">Read my notes</a></strong>
+      <p style="display:inline;">or go to</p>
+      <strong><a href="<%= items. amazon_link%>" target="_blank"  style="color: black ;text-decoration: none;">amazon</a></strong>
+      <p style="display:inline;">for detail review.</p>
+      
+    </div>
+    <%}%>
+  </div>
+ 
+<!-- <Script>
+  console.log(window.location.pathname);
+</Script> -->
+  <%-include("pertials/footer.ejs")%>

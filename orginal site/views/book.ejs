@@ -1,0 +1,62 @@
+<%-include("pertials/header.ejs")%>
+
+
+
+<div id="midcontainer">
+    <% for(items of BOOK) { %>
+    <div id="post" class="posts">
+
+        <img src="https://covers.openlibrary.org/b/isbn/<%=items.isbn%>-M.jpg" alt="bookcover" style="width:10%;  ">
+        <h2
+        style="
+          display: inline;
+          font-family: 'Lobster', sans-serif;
+          font-size: 1ew;
+          margin: 0% 5% 0% 5%;
+          
+        "
+      >
+       <%= items.book_name%>By-<%= items.author_name%>
+      </h2>
+      <a href="/books" class="backbtn">Back</a>
+<pre>
+        
+<div class="uploaded_user">
+    <p style="margin:0; padding: 2% 0 0 0;">Uploaded by:</p>
+       <% if(items.user_image==null){%>                    
+      <img src="/image/Screenshot (28).png" alt="user image"  class="uploaded_user_img">   
+      <% }else{ %>
+        <img src="<%=items.user_image%>" alt="user image" class="uploaded_user_img" >
+        <% } %>
+        <h3 style="margin:0; font-size:1.2rem; display: inline; padding: 2% 0 0 0;"><%= items.user_name%></h3>
+</div> 
+ISBN:<%= items.isbn %> 
+        
+Date of upload: <%= items.date_of_upload %>
+        
+How strongly I recommend it:<strong><%=items.book_rate%></strong>/10   
+        
+Go to the<strong> <a href="<%= items.amazon_link %>" target="_blank" style="color: black ;text-decoration: none;">amazon</a></strong> for details and review.        
+       
+</pre>
+
+    <p style="text-align:justify; line-height: 200%;">
+        <%= items.summery_of_book%>
+        <br>
+        <br>
+    </p>
+        <p style="text-align:justify; ">
+       <h2>My Note:</h2>
+        <br>
+        <span style="text-align:justify; line-height:250%;">
+        <%= items.short_note_of_book%>
+      </span>
+
+      </p>
+
+    </div>
+<% } %>
+</div>
+
+
+<%-include("pertials/footer.ejs")%>

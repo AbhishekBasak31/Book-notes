@@ -1,0 +1,278 @@
+<%-include("pertials/header.ejs")%>
+
+<div id="midcontainer">
+  <!-- New book entry form  -->
+  <div hidden="true" class="newlabel" style="display: flex; justify-content:end; align-content: center;  margin:2% 0 2% 0;"><a href="/devmode" hidden="true" class="newlabel backbtn" >Back</a></div>
+    <form action="/post" method="post" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+      
+      <label for="isbn" class="newlabel" hidden="true">ISBN:</label>
+
+      <input class="new_input" type="text" name="NewItemIsbn" autocomplete="off" style="border:none;border-bottom: 1px solid black;"
+      autofocus="true" hidden="true" />
+
+      <label for="booktitle" class="newlabel" hidden="true">Book Title:</label>
+
+      <input class="new_input" type="text" name="NewItemBooktitle" autocomplete="off" style="border:none;border-bottom: 1px solid black;"
+      autofocus="true" hidden="true" />
+
+      <label for="bookauthor" class="newlabel" hidden="true">Author of Book:</label>
+
+      <input class="new_input" type="text" name="NewItemAuthor" autocomplete="off" style="border:none;border-bottom: 1px solid black;"
+      autofocus="true" hidden="true" />
+      
+      <label for="bookrate" class="newlabel" hidden="true">Book Rate:</label>
+
+      <input class="new_input" type="text" name="NewItemBookRate" autocomplete="off" style="border:none;border-bottom: 1px solid black;"
+      autofocus="true" hidden="true" />
+
+      <label  class="newlabel"for="book_summery" hidden="true">Book Summery:</label>
+
+      <textarea class="new_input" cols="50" rows="5"  name="NewItemSummery"  autocomplete="off"
+        autofocus="true" hidden="true" style="padding: 2%; background-color:transparent; border: none; border-bottom: 1px solid black;  "></textarea>
+
+        <label  class="newlabel" for="Book's_Note" hidden="true">Book's Note:</label>
+
+      <textarea name="NewItemNote" class="new_input" cols="50" rows="10" autocomplete="off" autofocus="true" hidden="true" style=" border: none; border-bottom: 1px solid black; padding: 2%; background-color:transparent;"></textarea>
+
+      <label  class="newlabel"for="Book's_purchase_link" hidden="true">Purchase Link of The Book:</label>
+
+      <textarea name="NewItemPurchaseLink" class="new_input" cols="50" rows="3" autocomplete="off" autofocus="true" hidden="true" style=" border: none; border-bottom: 1px solid black; padding: 2%; background-color:transparent;"></textarea>
+      <button id="submit" class="new_input" type="submit" hidden="true" style="border: none;  border-radius: 0.375rem; background-color:#0d6efd; color:white; padding:0.8% 0% 0.8% 0%; " >Submit</button>
+
+    </form>
+
+    <!-- Edit book form -->
+ <div hidden="true" class="labels" style="display: flex; justify-content:end; align-content: center; margin:2% 0 2% 0;"><a href="/devmode" hidden="true" class="labels backbtn" >Back</a></div>
+<form class="edit" action="/edit" method="post" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+
+  <input type="hidden" name="updatedItemId" value="<%= items.id %>">
+
+  <label  class="labels" for="updatedisbn" hidden="true">ISBN:</label>
+  
+  <input id="input_isbn<%=items.id%>" type="text" name="updatedItemIsbn" value="<%= items.isbn %>" autocomplete="off" style="border:none;border-bottom: 1px solid black;"
+    autofocus="true" hidden="true" />
+
+    <label class="labels" for="updatedbook_title"  hidden="true">Book Title:</label>
+
+  <input id="input_title<%=items.id%>" type="text" name="updatedItemTitle" value="<%= items.book_name %>" autocomplete="off"
+    autofocus="true" hidden="true" style="border:none;border-bottom: 1px solid black;"/>
+
+    <label class="labels" for="updatedbook_author"  hidden="true">Author of Book:</label>
+
+    <input id="input_author<%=items.id%>" type="text" name="updatedItemAuthor" value="<%= items.author_name%>" autocomplete="off"
+    autofocus="true" hidden="true" style="border:none;border-bottom: 1px solid black;"/>
+
+
+    <label class="labels" for="updatedbook_rate"  hidden="true">Book Rate:</label>
+
+    <input id="input_rate<%=items.id%>" type="text" name="updatedItemRate" value="<%= items.book_rate%>" autocomplete="off"
+    autofocus="true" hidden="true" style="border:none;border-bottom: 1px solid black;"/>
+
+    <label  class="labels"for="updatedBook_Summery" hidden="true">Book Summery:</label>
+
+  <textarea id="input_summery<%=items.id%>" cols="50" rows="5"  name="updatedItemSummery"  autocomplete="off"
+    autofocus="true" hidden="true" style="padding: 2%; background-color:transparent; border: none; border-bottom: 1px solid black;  "><%= items.summery_of_book%></textarea>
+
+    <label  class="labels"for="updatedBook's_Note" hidden="true">Book's Note:</label>
+
+  <textarea name="updatedItemNote" id="input_note<%=items.id %>" cols="50" rows="10" autocomplete="off" autofocus="true" hidden="true" style=" border: none; border-bottom: 1px solid black; padding: 2%; background-color:transparent;"><%= items.short_note_of_book%></textarea>
+
+  <label  class="labels"for="updatedBook's_purchase_link" hidden="true">Purchase Link of The Book:</label>
+
+  <textarea name="updatedbookLink" id="input_book_purchase_link<%=items.id %>" cols="50" rows="3" autocomplete="off" autofocus="true" hidden="true" style=" border: none; border-bottom: 1px solid black; padding: 2%; background-color:transparent;"><%= items.amazon_link%></textarea>
+
+  <button id="done<%=items.id%>" class="edit" type="submit" hidden="true" style="border: none;  border-radius: 0.375rem; background-color:#0d6efd; color:white; padding:0.8% 0% 0.8% 0%;  " >Save</button>
+
+</form>
+
+
+
+
+    <!-- Main display  start  -->
+
+    <!-- Add new book btn -->
+    <div id="user" class="grid-container"> 
+      <!-- style="display: flex;  flex-wrap: wrap; justify-content: end; align-content: center; gap:3%; margin:2% 0 0 0;" -->
+      <% if(User_img==null){ %>
+    
+      <img src="/image/Screenshot (28).png" alt="user image"  class="grid-item item1">
+      <!-- style="width:4.5%;  border-radius: 50%; object-fit: contain;"  -->
+
+    <% } else{ %>
+      <img src="<%=User_img%>" alt="user image"class="grid-item item1" >
+      <!-- style="width:4.5%;  border-radius: 50%; object-fit: contain;" -->
+    <% } %>
+      <h5 class="grid-item item2"><%=User_name%></h5>
+      <!-- style="padding-top: 0.8%;" -->
+      <a href="/logout" class="grid-item item3" >Log out</a>
+      <!-- style="padding:1% 2% 1% 2%;  text-decoration:none; color:white; background-color:#0d6efd; font-size: 1rem; border-radius:0.375rem;" -->
+    </div>
+
+    <div id="Addbook" style="display: flex; justify-content: start; margin-left: 2% ; " ><a class="edit_addbook" onclick="newpost('<%=isNoentry%>')">Add new book</a></div>
+
+    <!-- Existing books  -->
+    <% for(items of listofitems) {%>
+    <div id="post" class="posts">
+      
+        <figure style="display: inline;">
+        
+            <img  id="book_img<%=items.id%>" class="book_details" src="https://covers.openlibrary.org/b/isbn/<%=items.isbn%>-M.jpg" alt="bookcover" style="width:10%;  ">
+
+        </figure>
+        <h2
+        id="book_title<%=items.id%>"
+        class="book_details"
+        style="
+          display: inline;
+          font-family: 'Lobster', sans-serif;
+          font-size: 2vw;
+          margin: 0% 5% 0% 5%;
+          
+        "
+      >
+      <%= items.book_name %>
+    </h2>
+    <!-- Rating of book -->
+    <p id="Bookrating" style="margin-top:2%;">How strongly I recommend it:
+      <strong><%=items.book_rate%></strong>/10</small></p>
+
+      <!-- Delete btn  -->
+    <form action="/delete" method="post">
+        <label id="deletebooklabel" class="deletebtnlabel" for="deletebook" >Click the checkbox to delete the book</label>
+        <input id="delete_book<%=items.id%>" class="deletebtnlabel" type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= items.id %>">
+      </form>
+
+<!-- Edit book form
+
+<form class="edit" action="/edit" method="post" style="display: flex; flex-direction: column; gap: 20px;">
+  <input type="hidden" name="updatedItemId" value="<= items.id %>">
+
+  <label  class="labels" for="updatedisbn" hidden="true">ISBN:</label>
+  
+  <input id="input_isbn<=items.id%>" type="text" name="updatedItemIsbn" value="<= items.isbn %>" autocomplete="off" style="border:none;border-bottom: 1px solid black;"
+    autofocus="true" hidden="true" />
+
+    <label class="labels" for="updatedbook_title"  hidden="true">Book Title:</label>
+
+  <input id="input_title<=items.id%>" type="text" name="updatedItemTitle" value="<= items.book_name %>" autocomplete="off"
+    autofocus="true" hidden="true" style="border:none;border-bottom: 1px solid black;"/>
+
+    <label class="labels" for="updatedbook_author"  hidden="true">Author of Book:</label>
+
+    <input id="input_author<=items.id%>" type="text" name="updatedItemAuthor" value="<= items.author_name%>" autocomplete="off"
+    autofocus="true" hidden="true" style="border:none;border-bottom: 1px solid black;"/>
+
+
+    <label class="labels" for="updatedbook_rate"  hidden="true">Book Rate:</label>
+
+    <input id="input_rate<=items.id%>" type="text" name="updatedItemRate" value="<= items.book_rate%>" autocomplete="off"
+    autofocus="true" hidden="true" style="border:none;border-bottom: 1px solid black;"/>
+
+    <label  class="labels"for="updatedBook_Summery" hidden="true">Book Summery:</label>
+
+  <textarea id="input_summery<=items.id%>" cols="50" rows="5"  name="updatedItemSummery"  autocomplete="off"
+    autofocus="true" hidden="true" style="padding: 2%; background-color:transparent; border: none; border-bottom: 1px solid black;  "><= items.summery_of_book%></textarea>
+
+    <label  class="labels"for="updatedBook's_Note" hidden="true">Book's Note:</label>
+
+  <textarea name="updatedItemNote" id="input_note<=items.id %>" cols="50" rows="10" autocomplete="off" autofocus="true" hidden="true" style=" border: none; border-bottom: 1px solid black; padding: 2%; background-color:transparent;"><= items.short_note_of_book%></textarea>
+
+  <label  class="labels"for="updatedBook's_purchase_link" hidden="true">Purchase Link of The Book:</label>
+
+  <textarea name="updatedbookLink" id="input_book_purchase_link<=items.id %>" cols="50" rows="3" autocomplete="off" autofocus="true" hidden="true" style=" border: none; border-bottom: 1px solid black; padding: 2%; background-color:transparent;"><= items.amazon_link%></textarea>
+
+  <button id="done<=items.id%>" class="edit" type="submit" hidden="true" style="border: none;  border-radius: 0.375rem; background-color:#0d6efd; color:white; padding:0.8% 0% 0.8% 0%;  " >Save</button>
+
+</form> -->
+
+<!-- Edit btn -->
+<button id="edit<%=items.id%>" style="margin-top:2%;" class="edit_addbook" onclick="Edit_form('<%=items.id%>')">Edit</button>
+
+    </div>
+    <% } %>
+</div>
+
+<!-- Main display ends here. -->
+
+
+
+
+
+  <script>
+
+    //////////////////////////////////////////////////// Edit book form//////////////////////////////////////////////////////////////// 
+    function Edit_form(id) {
+    document.getElementById("user").setAttribute("hidden", true);
+    document.getElementById("Addbook").setAttribute("hidden", true);
+    document.getElementById("edit" + id).setAttribute("hidden", true);
+    document.getElementById("book_img" + id).setAttribute("hidden", true);
+    document.getElementById("book_title" + id).setAttribute("hidden", true);
+    document.getElementById("Bookrating").setAttribute("hidden", true);
+    document.getElementById("deletebooklabel").setAttribute("hidden",true);
+    document.getElementById("delete_book" + id).setAttribute("hidden", true);
+    document.getElementById("done" + id).removeAttribute("hidden");
+    
+    // Get all elements with class name "labels"
+    var labelElements = document.getElementsByClassName("labels");
+
+    // Iterate through the collection and remove the "hidden" attribute
+    for (var i = 0; i < labelElements.length; i++) {
+        labelElements[i].removeAttribute("hidden");
+    }
+
+    // Get all elements with class name "input" followed by the id
+    var inputElements = document.querySelectorAll('[id^="input"][id$="' + id + '"]');
+
+    // Iterate through the collection and remove the "hidden" attribute
+    for (var i = 0; i < inputElements.length; i++) {
+        inputElements[i].removeAttribute("hidden");
+    }
+
+    // Additional code...
+}
+
+
+/////////////////////////////////For new Book entry///////////////////////////////////////////////////
+
+
+function newpost(isfirstentry){
+  document.getElementById("user").setAttribute("hidden", true);
+  document.getElementById("Addbook").setAttribute("hidden", true);
+  
+  if(isfirstentry){
+  
+    var new_labels= document.getElementsByClassName("newlabel");
+    for(var r=0; r<new_labels.length; r++){
+      new_labels[r].removeAttribute("hidden");
+    }
+    var newinput=document.getElementsByClassName("new_input");
+    for(var e=0; e<newinput.length; e++){
+      newinput[e].removeAttribute("hidden");
+    }
+    document.getElementById("post").setAttribute("hidden",true);
+  }
+  else{
+    var edit_addbook=document.getElementsByClassName("edit_addbook");
+    for(var i=0; i<edit_addbook.length; i++){
+      edit_addbook[i].setAttribute("hidden",true);
+    }
+    
+    var new_labels= document.getElementsByClassName("newlabel");
+    for(var r=0; r<new_labels.length; r++){
+      new_labels[r].removeAttribute("hidden");
+    }
+    var newinput=document.getElementsByClassName("new_input");
+    for(var e=0; e<newinput.length; e++){
+      newinput[e].removeAttribute("hidden");
+    }
+    document.getElementById("post").setAttribute("hidden",true);
+  }
+  
+
+ 
+
+
+}
+    </script>
+
+<%-include("pertials/footer.ejs")%>

@@ -1,0 +1,22 @@
+<div style=" width:40%;
+height:70%;
+position: relative;
+top:10% ;
+left:30%;
+background-color: rgb(255, 255, 255); 
+border: 1px solid rgb(184, 178, 178);">
+   
+    <h1 style="color:#0d6efd; text-align:center; font-size:3.5rem; padding: 1%; margin: 2%; ">Login</h2>
+    <form action="/login" method="post" style=" display:flex; flex-direction: column; justify-content: center;  padding:3% 5% 5% 5%">
+        <input type="text" name="username" placeholder="Enter the email id" style="border: 0px; margin:2%; border-bottom: 1px solid rgb(190, 184, 184); padding:2%; outline: none;" >
+        <input type="password" name="password" placeholder="Enter the password"  style="border: 0px; margin:2%; border-bottom: 1px solid rgb(190, 184, 184); padding:2%; outline: none;">
+        <input type="submit" value="Submit" style="padding:2%; text-align:center; background-color:#0d6efd; color:white; font-size:1.5rem; border: 0px; margin:2%;"  >
+        <span style="background-color: rgb(238, 234, 234);padding:3.5%; margin:2%;">
+            
+            <a  href="/auth/google" role="button" style="text-decoration: none; color:rgb(140, 133, 133);display: flex; gap:5%;  justify-content: center; align-content: center;">
+                <img width="48" height="48" src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo"/>
+                <span style="font-size:1.2rem; margin-top: 2.5%; ">Continue with Google</span> 
+              </a>
+        </span>
+    </form>
+</div>
